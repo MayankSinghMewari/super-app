@@ -1,0 +1,294 @@
+/* Enhanced SeatPicker.module.css */
+.seatPicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 800px;
+  margin: 2rem auto;
+  width: 100%;
+  animation: fadeIn 0.5s ease;
+}
+
+.screen {
+  background: linear-gradient(to bottom, #e2e8f0, #cbd5e1);
+  color: #334155;
+  padding: 1rem 2rem;
+  margin-bottom: 3rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1.1rem;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Screen shine effect */
+.screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  to {
+    left: 100%;
+  }
+}
+
+.seatGrid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(40px, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 2.5rem;
+  perspective: 1000px;
+}
+
+.seat {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px 8px 0 0;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* Add seat bottom for 3D effect */
+.seat::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 8px;
+  background: inherit;
+  bottom: -8px;
+  left: 0;
+  border-radius: 0 0 4px 4px;
+  filter: brightness(0.8);
+  transform: translateZ(-1px);
+}
+
+.seat:hover:not(.booked):not(.locked) {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Seat status colors */
+.available {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 2px solid #86efac;
+}
+
+.available::after {
+  border: 2px solid #86efac;
+  border-top: none;
+}
+
+.selected {
+  background-color: #4ade80;
+  color: #14532d;
+  border: 2px solid #16a34a;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.selected::after {
+  border: 2px solid #16a34a;
+  border-top: none;
+}
+
+.locked {
+  background-color: #fff7ed;
+  color: #c2410c;
+  border: 2px solid #fdba74;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.locked::after {
+  border: 2px solid #fdba74;
+  border-top: none;
+}
+
+.booked {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 2px solid #fca5a5;
+  cursor: not-allowed;
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.booked::after {
+  border: 2px solid #fca5a5;
+  border-top: none;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 1.25rem;
+  background: #f8fafc;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.legendItem:hover {
+  transform: translateY(-2px);
+}
+
+.legendColor {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Seat count indicator */
+.seatCount {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.seatCount span {
+  color: var(--primary);
+}
+
+/* Row identifiers */
+.rowIdentifier {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .seatPicker {
+    background: #1e293b;
+  }
+  
+  .screen {
+    background: linear-gradient(to bottom, #334155, #1e293b);
+    color: #f8fafc;
+  }
+  
+  .available {
+    background-color: #064e3b;
+    color: #a7f3d0;
+    border-color: #059669;
+  }
+  
+  .available::after {
+    border-color: #059669;
+  }
+  
+  .selected {
+    background-color: #10b981;
+    color: #ecfdf5;
+    border-color: #059669;
+  }
+  
+  .selected::after {
+    border-color: #059669;
+  }
+  
+  .locked {
+    background-color: #7c2d12;
+    color: #ffedd5;
+    border-color: #c2410c;
+  }
+  
+  .locked::after {
+    border-color: #c2410c;
+  }
+  
+  .booked {
+    background-color: #7f1d1d;
+    color: #fecaca;
+    border-color: #b91c1c;
+  }
+  
+  .booked::after {
+    border-color: #b91c1c;
+  }
+  
+  .legend {
+    background: #0f172a;
+  }
+}
+
+@media (max-width: 768px) {
+  .seatPicker {
+    padding: 1.5rem 1rem;
+  }
+  
+  .seatGrid {
+    grid-template-columns: repeat(8, minmax(30px, 1fr));
+    gap: 8px;
+  }
+  
+  .seat {
+    font-size: 0.7rem;
+  }
+  
+  .screen {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .seatGrid {
+    grid-template-columns: repeat(6, minmax(25px, 1fr));
+    gap: 6px;
+  }
+  
+  .legend {
+    gap: 0.75rem;
+    padding: 1rem 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

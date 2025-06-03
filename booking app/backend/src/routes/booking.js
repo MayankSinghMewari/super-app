@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const bookingController = require('../controllers/bookingController');
+const authMiddleware = require('../middlewares/authMiddleware');
+router.use(authMiddleware); 
+router.get('/', bookingController.getUserBookings);
+router.post('/', bookingController.createBooking);
+router.post('/confirm', bookingController.confirmBooking);
+router.get('/showtime/:showtimeId', bookingController.getShowtimeDetails);
+router.post('/lock', bookingController.lockSeats);
+router.post('/unlock-seats', bookingController.unlockSeats);
+module.exports = router;

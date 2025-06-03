@@ -1,0 +1,83 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  role      String    @default("USER") // "USER" or "ADMIN"
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Movie {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String
+  duration    Int // in minutes
+  rating      String?
+  genre       String?
+  imageUrl    String?
+  showtimes   Showtime[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Showtime {
+  id        Int       @id @default(autoincrement())
+  movie     Movie     @relation(fields: [movieId], references: [id])
+  movieId   Int
+  time      DateTime
+  screen    String?
+  seats     Seat[]
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Booking {
+  id           Int           @id @default(autoincrement())
+  user         User          @relation(fields: [userId], references: [id])
+  userId       Int
+  showtime     Showtime      @relation(fields: [showtimeId], references: [id])
+  showtimeId   Int
+  bookingSeats BookingSeat[]
+  paymentId    String?
+  isPaid       Boolean       @default(false)
+  totalPrice   Float
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Seat {
+  id           Int           @id @default(autoincrement())
+  showtime     Showtime      @relation(fields: [showtimeId], references: [id])
+  showtimeId   Int
+  seatNumber   String
+  row          String
+  column       Int
+  isBooked     Boolean       @default(false)
+  isLocked     Boolean       @default(false)
+  lockedUntil  DateTime?
+  bookingSeats BookingSeat[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model BookingSeat {
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+  bookingId Int
+  seat      Seat     @relation(fields: [seatId], references: [id])
+  seatId    Int
+  price     Float?
+  createdAt DateTime @default(now())
+
+  @@id([bookingId, seatId])
+}

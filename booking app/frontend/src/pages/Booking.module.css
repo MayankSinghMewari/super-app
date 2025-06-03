@@ -1,0 +1,156 @@
+.selectedSeats {
+  margin-bottom: 1.75rem;
+  padding: 1rem;
+  background: #f0f9ff;
+  border-radius: 12px;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+}
+
+.selectedSeats h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.15rem;
+  color: #0c4a6e;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.selectedSeats h3::before {
+  content: '🎟️';
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.selectedSeats ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.selectedSeats li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  border-left: 4px solid #3498db;
+}
+
+.selectedSeats li:hover {
+  background: #edf7fd;
+  transform: translateX(3px);
+}
+
+.selectedSeats li span:first-child {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+}
+
+.selectedSeats li span:first-child::before {
+  content: '🪑';
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.selectedSeats li span:last-child {
+  font-weight: 700;
+  color: #16a34a;
+  font-size: 1.05rem;
+  background: #ecfdf5;
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  border: 1px solid rgba(22, 163, 74, 0.2);
+}
+
+/* Price summary enhancements */
+.priceSummary {
+  margin: 1.75rem 0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  color: #4b5563;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.priceRow:last-of-type {
+  border-bottom: none;
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  font-weight: bold;
+  color: #0f172a;
+  font-size: 1.25rem;
+  padding: 1rem;
+  background: #f1f5f9;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .selectedSeats {
+    background: #0c4a6e;
+    border-color: #0284c7;
+  }
+  
+  .selectedSeats h3 {
+    color: #e0f2fe;
+  }
+  
+  .selectedSeats li {
+    background: #082f49;
+    border-left-color: #0ea5e9;
+  }
+  
+  .selectedSeats li:hover {
+    background: #0c4a6e;
+  }
+  
+  .selectedSeats li span:first-child {
+    color: #e0f2fe;
+  }
+  
+  .selectedSeats li span:last-child {
+    color: #4ade80;
+    background: #064e3b;
+    border-color: rgba(74, 222, 128, 0.2);
+  }
+  
+  .priceSummary {
+    background: #0f172a;
+    border-color: #1e293b;
+  }
+  
+  .priceRow {
+    color: #cbd5e1;
+    border-bottom-color: #1e293b;
+  }
+  
+  .totalPrice {
+    color: #f8fafc;
+    background: #1e293b;
+    border-color: #334155;
+  }
+}
